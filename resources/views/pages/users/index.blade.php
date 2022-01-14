@@ -14,7 +14,7 @@
         </div>
     </div>
 </div>
-<livewire:user-delete />
+<!-- <livewire:user-delete /> -->
 @endsection
 
 @push("custom-scripts")

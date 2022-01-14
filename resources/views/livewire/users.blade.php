@@ -18,7 +18,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Claims Created</th>
-                    <th>Actions</th>
+                    <!-- <th>Actions</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -28,9 +28,9 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->claims_count}}</td>
-                    <td>
+                    <!-- <td>
                         <button wire:click.prevent="delete({{$user->id}})" class="btn btn-sm btn-danger">Delete</button>
-                    </td>
+                    </td> -->
                 </tr>
                 @empty
                 <tr>

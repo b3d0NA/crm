@@ -21,7 +21,9 @@ class SalesChannelController extends Controller
         return redirect()->route("sales.channel");
     }
 
-    public function destroy(SalesChannel $sales){
-        dd($sales);
+    public function destroy(Request $request){
+        $sales = SalesChannel::findOrFail($request->id);
+        $sales->delete();
+        return redirect()->route("sales.channel");
     }
 }

@@ -75,9 +75,7 @@ class ClaimController extends Controller
                 Mail::to($user->email)
                 ->queue(new UserCreated($user, $password));
             }catch(Exception $e){
-                return back()->withErrors([
-                    $e
-                ]);
+                return back()->withErrors([$e->getMessage()]);
             }
             auth()->attempt(array_merge($request->only("email"), ["password" => $password]));
         }else{

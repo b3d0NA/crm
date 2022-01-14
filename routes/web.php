@@ -27,7 +27,7 @@ Route::middleware(['admin.auth'])->prefix("admin")->group(function () {
     Route::get('claims/{claim}', [ClaimController::class, "edit"])->name("claims.edit");
     Route::put('claims/{claim}', [ClaimController::class, "update"])->name("claims.update");
     Route::get('sales-channels', [SalesChannelController::class, "index"])->name("sales.channel");
-    Route::get('sales-channels/{sales_channel}', [SalesChannelController::class, "destroy"])->name("sales.delete");
+    Route::get('sales-channels/{id}', [SalesChannelController::class, "destroy"])->name("sales.delete");
     Route::post('sales-channels', [SalesChannelController::class, "store"])->name("sales.store");
     Route::get('items', [ItemController::class, "index"])->name("items.index");
     Route::get('items/create', [ItemController::class, "create"])->name("items.create");
