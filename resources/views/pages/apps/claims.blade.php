@@ -18,6 +18,7 @@
 <livewire:claim-view />
 <livewire:claim-edit />
 <livewire:claim-delete />
+<livewire:decision-update />
 @endsection
 
 @push("modals")
@@ -27,7 +28,6 @@
 <script>
 $(document).ready(function() {
     window.addEventListener("openClaimViewModal", function() {
-        console.log("I am here");
         $("#claimViewModal").modal("show")
     });
     window.addEventListener("closeClaimViewModal", function() {
@@ -45,16 +45,31 @@ $(document).ready(function() {
     window.addEventListener("closeClaimDeleteModal", function() {
         $("#claimDeleteModal").modal("hide")
     });
+    window.addEventListener("decisionUpdated", function() {
+        console.log("I am decisionUpdated");
+        $("#decisionUpdateModal").modal("hide")
+    });
     if ($("#itemGroup").length) {
         $("#itemGroup").select2();
     }
-
     $('#claimList').DataTable({
         "searching": false,
         "paging": false,
         "info": false
     });
 });
+
+function emitDecisionChanged(claimId, value) {
+    Livewire.emit("setDecisionUpdate", {
+        value: value,
+        id: claimId
+    })
+    console.log({
+        value: value,
+        id: claimId
+    });
+    $("#decisionUpdateModal").modal("show")
+}
 </script>
 @endpush
 

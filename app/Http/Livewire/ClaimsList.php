@@ -17,7 +17,7 @@ class ClaimsList extends Component
     public $collectedDecisions;
     public $escalation;
 
-    protected $listeners = ["claimDeleted" => '$refresh', "claimUpdated" => '$refresh'];
+    protected $listeners = ["claimDeleted" => '$refresh', "claimUpdated" => '$refresh', "decisionUpdated" => '$refresh'];
 
     public function mount($decisions){
         $this->collectedDecisions = $decisions;

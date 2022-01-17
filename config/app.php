@@ -2,6 +2,10 @@
 
 return [
 
+    'decisions' => ["Approved", "Not Approved", "Return to Estonia for inspection", "Return
+    to Mathias Sweden", "Send to Mathias in Sweden", "Under Review"],
+    'priorities' => ["A", "B", "C"],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

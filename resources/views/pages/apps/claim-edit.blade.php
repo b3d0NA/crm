@@ -34,32 +34,37 @@
                         <div class="col-sm-4">
                             <div class="mb-3">
                                 <label for="decision" class="form-label">Decision</label>
-                                <input name="decision" id="decision" type="text" class="form-control"
-                                    value="{{$claim->decision}}">
-                                <div class="mb-3">
-                                    <label for="itemGroup" class="form-label">Item Group:</label>
-                                    <select name="product_group" id="itemGroup"
-                                        class="js-example-basic-single form-select" data-width="100%">
-                                        <option disabled>Select group</option>
-                                        @foreach ($groups as $group)
-                                        @if (!$claim->product_group)
-                                        @endif
-                                        <option @if ($group==$claim->product_group)
-                                            selected
-                                            @endif value="{{$group}}">{{$group}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="priority" class="form-label">Priority:</label>
-                                    <select name="priority" id="priority" class="form-select" data-width="100%">
-                                        @foreach (["A", "B", "C"] as $prio)
-                                        <option @if ($prio==$claim->priority)
-                                            selected
-                                            @endif value="{{$prio}}">{{$prio}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <select name="decision" id="decision" class="form-select" data-width="100%">
+                                    @foreach (config('app.decisions') as $decision)
+                                    <option @if ($decision==$claim->decision)
+                                        selected
+                                        @endif value="{{$decision}}">{{$decision}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="itemGroup" class="form-label">Item Group:</label>
+                                <select name="product_group" id="itemGroup" class="js-example-basic-single form-select"
+                                    data-width="100%">
+                                    <option disabled>Select group</option>
+                                    @foreach ($groups as $group)
+                                    @if (!$claim->product_group)
+                                    @endif
+                                    <option @if ($group==$claim->product_group)
+                                        selected
+                                        @endif value="{{$group}}">{{$group}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="priority" class="form-label">Priority:</label>
+                                <select name="priority" id="priority" class="form-select" data-width="100%">
+                                    @foreach (config('app.priorities') as $prio)
+                                    <option @if ($prio==$claim->priority)
+                                        selected
+                                        @endif value="{{$prio}}">{{$prio}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

@@ -55,27 +55,33 @@
                     <td>{{Str::limit($claim->failure_type, 15, '...')}}</td>
                     <td>{{Str::limit($claim->problem_description, 20, '...')}}</td>
                     <td>
-                        <p href="#" class="
-                                    btn text-white cursor-default bg-primary
-                                    @if (in_array($claim->decision, ['approved', 'Approved', 'approve', 'Approve']))
-                                    bg-success
-                                    @elseif (in_array($claim->decision, ['not-approved', 'not approved', 'Not approved', 'Not Approved', 'Declined', 'declined']))
-                                    bg-danger
-                                    @elseif(!empty($claim->decision))
-                                    bg-warning
-                                    @endif
+                        <select onchange="emitDecisionChanged({{$claim->id}}, this.value)" id="decisionSelect" class="
+                                    btn text-white cursor-default bg-primary form-select
+                                    {{$claim->decisionBg($claim->decision)[0]}}
                                 ">
-                            @if (!$claim->decision)
-                            Pending...
-                            @else
-                            {{$claim->decision}}
-                            @endif
-                        </p>
+                            @foreach (config('app.decisions') as $decision)
+                            <option style="background-color: #fff;color:#000" @if ($decision==$claim->decision)
+                                selected
+                                @endif value="{{$decision}}">
+                                {{$decision}}
+                            </option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
-                        <button wire:click.prevent="view({{$claim}})" class="btn btn-sm btn-info">View</button>
+                        <button wire:click.prevent="view({{$claim->id}})" class="btn btn-sm btn-info">
+                            <span wire:loading wire:target="view({{$claim->id}})"
+                                class="spinner-border spinner-border-sm text-light" role="status"
+                                aria-hidden="true"></span>
+                            <span wire:loading.remove wire:target="view({{$claim->id}})">View</span>
+                        </button>
                         <a href="{{route('claims.edit', $claim)}}" class="btn btn-sm btn-primary">Edit</a>
-                        <button wire:click.prevent="delete({{$claim}})" class="btn btn-sm btn-danger">Delete</button>
+                        <button wire:click.prevent="delete({{$claim->id}})" class="btn btn-sm btn-danger">
+                            <span wire:loading wire:target="delete({{$claim->id}})"
+                                class="spinner-border spinner-border-sm text-light" role="status"
+                                aria-hidden="true"></span>
+                            <span wire:loading.remove wire:target="delete({{$claim->id}})">Delete</span>
+                        </button>
                     </td>
                 </tr>
                 @empty
